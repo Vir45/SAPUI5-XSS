@@ -1,0 +1,15 @@
+{
+    "singleQuote": false,
+    "bracketSpacing": true,
+    "printWidth": 200,
+    "endOfLine": "auto",
+    "tabWidth": 4,
+    "overrides": [
+      {
+        "files": ["**/*.xml"],
+        "options": {
+          "parser": "xml"
+        }
+      }
+    ]
+}

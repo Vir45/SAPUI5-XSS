@@ -1,0 +1,47 @@
+<mvc:View controllerName="security.demo.securityDemo.controller.Master"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:mvc="sap.ui.core.mvc">
+  <f:DynamicPage id="dynamicPageId"
+    toggleHeaderOnTitleClick="false">
+    <!-- DynamicPage Title -->
+    <f:title>
+      <f:DynamicPageTitle>
+        <f:heading>
+          <Title text="Products ({products>/ProductCollectionStats/Counts/Total})" />
+        </f:heading>
+      </f:DynamicPageTitle>
+    </f:title>
+
+    <!-- DynamicPage Content -->
+    <f:content>
+      <VBox>
+        <OverflowToolbar class="sapFDynamicPageAlignContent">
+          <ToolbarSpacer />
+          <OverflowToolbarButton icon="sap-icon://add"
+            text="Add"
+            type="Transparent"
+            press=".onAdd" />
+        </OverflowToolbar>
+        <List id="productsTable"
+          inset="false"
+          items="{
+						path: 'products>/ProductCollection',
+						sorter: {
+							path: 'Name'
+						}
+					}"
+          class="sapFDynamicPageAlignContent"
+          width="auto">
+          <StandardListItem type="Navigation"
+            title="{products>Name}"
+            description="
+              {products>ProductId}"
+            press="
+              .onListItemPress" />
+        </List>
+      </VBox>
+    </f:content>
+
+  </f:DynamicPage>
+</mvc:View>

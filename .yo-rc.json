@@ -1,0 +1,23 @@
+{
+  "generator-template-ui5-project": {
+    "projectname": "securityDemo",
+    "namespaceUI5": "security.demo",
+    "enableFPM": false,
+    "platform": "Static webserver",
+    "viewtype": "XML",
+    "ui5libs": "Content delivery network (SAPUI5)",
+    "newdir": true,
+    "initrepo": true,
+    "namespaceURI": "security/demo",
+    "uimodules": [
+      "uimodule"
+    ],
+    "opa5Journeys": [
+      "Main"
+    ],
+    "opa5pos": [
+      "Main"
+    ],
+    "setupCompleted": true
+  }
+}

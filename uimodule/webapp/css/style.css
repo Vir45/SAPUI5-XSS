@@ -1,0 +1,23 @@
+/* Enter your custom styles here */
+.custom-input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 24px;
+}
+
+.custom-logo {
+  height: 5rem;
+  width: 5rem;
+}
+
+.custom-html {
+  font-size: .875rem;
+}
+
+.custom-html p {
+  margin: 0;
+}
+
+.tox.tox-silver-sink.tox-tinymce-aux {
+  height: 1px;
+}

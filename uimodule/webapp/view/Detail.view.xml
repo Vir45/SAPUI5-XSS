@@ -1,0 +1,165 @@
+<mvc:View controllerName="security.demo.securityDemo.controller.Detail"
+  xmlns="sap.uxap"
+  xmlns:m="sap.m"
+  xmlns:f="sap.f"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:core="sap.ui.core"
+  xmlns:custom="security.demo.securityDemo.controls">
+  <ObjectPageLayout id="ObjectPageLayout"
+    showTitleInHeaderContent="true"
+    alwaysShowContentHeader="false"
+    preserveHeaderStateOnScroll="false"
+    headerContentPinnable="true"
+    isChildPage="true"
+    showFooter="true"
+    upperCaseAnchorBar="false">
+    <headerTitle>
+      <ObjectPageDynamicHeaderTitle>
+        <expandedHeading>
+          <m:Title text="{= ${draftModel>/isDraft} ? 'Draft' : ${products>Name}}"
+            wrapping="true"
+            class="sapUiSmallMarginEnd" />
+        </expandedHeading>
+
+        <navigationActions>
+          <m:OverflowToolbarButton type="Transparent"
+            icon="sap-icon://full-screen"
+            press=".handleFullScreen"
+            tooltip="Enter Full Screen Mode"
+            visible="{= ${layout>/actionButtonsInfo/midColumn/fullScreen} !== null }" />
+          <m:OverflowToolbarButton type="Transparent"
+            icon="sap-icon://exit-full-screen"
+            press=".handleExitFullScreen"
+            tooltip="Exit Full Screen Mode"
+            visible="{= ${layout>/actionButtonsInfo/midColumn/exitFullScreen} !== null }" />
+          <m:OverflowToolbarButton type="Transparent"
+            icon="sap-icon://decline"
+            press=".handleClose"
+            tooltip="Close column"
+            visible="{= ${layout>/actionButtonsInfo/midColumn/closeColumn} !== null }" />
+        </navigationActions>
+
+        <actions>
+          <m:ToggleButton text="Edit"
+            visible="{= !${draftModel>/isDraft}}"
+            type="Emphasized"
+            press=".onEditToggleButtonPress" />
+        </actions>
+      </ObjectPageDynamicHeaderTitle>
+    </headerTitle>
+
+    <headerContent>
+      <m:FlexBox visible="{= !${draftModel>/isDraft}}"
+        wrap="Wrap"
+        fitContainer="true"
+        alignItems="Stretch">
+        <custom:CustomLogo src="{products>logo}"
+          class="sapUiSmallMarginEnd" />
+        <m:VBox justifyContent="Center"
+          class="sapUiSmallMarginEnd">
+          <m:Label text="Main Category" />
+          <m:Text text="{products>MainCategory}" />
+        </m:VBox>
+        <m:VBox justifyContent="Center"
+          class="sapUiSmallMarginEnd">
+          <m:Label text="Subcategory" />
+          <m:Text text="{products>Category}" />
+        </m:VBox>
+      </m:FlexBox>
+
+      <m:FlexBox visible="{draftModel>/isDraft}"
+        wrap="Wrap"
+        fitContainer="true"
+        alignItems="Stretch">
+        <custom:CustomLogo src="{draftModel>/logo}"
+          class="sapUiSmallMarginEnd" />
+        <m:VBox justifyContent="Center"
+          class="sapUiSmallMarginEnd">
+          <m:Label text="Main Category" />
+          <m:Text text="{draftModel>/Category}" />
+        </m:VBox>
+        <m:VBox justifyContent="Center"
+          class="sapUiSmallMarginEnd">
+          <m:Label text="Subcategory" />
+          <m:Text text="{draftModel>/MainCategory}" />
+        </m:VBox>
+      </m:FlexBox>
+    </headerContent>
+
+    <sections>
+      <ObjectPageSection title="General Information">
+        <subSections>
+          <ObjectPageSubSection>
+            <blocks>
+              <form:SimpleForm visible="{= !${draftModel>/isDraft}}"
+                maxContainerCols="2"
+                layout="ResponsiveGridLayout"
+                labelSpanL="12"
+                labelSpanM="12"
+                emptySpanL="0"
+                emptySpanM="0"
+                columnsL="1"
+                columnsM="1">
+                <form:content>
+                  <m:Label text="Product ID" />
+                  <m:Text text="{products>ProductId}" />
+                  <m:Label text="Description" />
+                  <core:HTML content="&lt;div class=&quot;custom-html&quot;&gt;{products>Description}&lt;/div&gt;" />
+                  <m:Label text="Supplier" />
+                  <m:Text text="{products>SupplierName}" />
+                </form:content>
+              </form:SimpleForm>
+
+              <m:VBox visible="{draftModel>/isDraft}">
+                <form:SimpleForm maxContainerCols="2"
+                  editable="false"
+                  layout="ResponsiveGridLayout"
+                  labelSpanL="12"
+                  labelSpanM="12"
+                  emptySpanL="0"
+                  emptySpanM="0"
+                  columnsL="1"
+                  columnsM="1">
+                  <form:toolbar>
+                    <m:Toolbar id="TB1">
+                      <custom:CustomTitle id="Title1"
+                        text="Supplier: {draftModel>/SupplierName}" />
+                    </m:Toolbar>
+                  </form:toolbar>
+                  <form:content>
+                    <m:Label text="Type" />
+                    <custom:CustomInput value="{draftModel>/Type}" />
+                    <m:Label text="Supplier" />
+                    <m:Input value="{draftModel>/SupplierName}" />
+                    <m:Label text="New Logo" />
+                    <m:Input value="{draftModel>/logo}" />
+                  </form:content>
+                </form:SimpleForm>
+
+                <m:VBox class="sapUiSmallMarginBegin"
+                  width="100%">
+                  <m:Label text="Description:"
+                    class="sapUiTinyMarginBottom" />
+                  <m:HBox id="editorContainer" />
+                </m:VBox>
+              </m:VBox>
+            </blocks>
+          </ObjectPageSubSection>
+        </subSections>
+      </ObjectPageSection>
+    </sections>
+
+    <footer>
+      <m:OverflowToolbar visible="{draftModel>/isDraft}">
+        <m:ToolbarSpacer />
+        <m:Button type="Accept"
+          press=".onSaveChanges"
+          text="Save" />
+        <m:Button type="Reject"
+          text="Cancel"
+          press=".onCancelChanges" />
+      </m:OverflowToolbar>
+    </footer>
+  </ObjectPageLayout>
+</mvc:View>
